@@ -2,6 +2,7 @@ D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\MessageCre
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\EventCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\util\AttachmentHandler.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\SlashCommandListener.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\AfkCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\SendMessageToUser.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\EventListener.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\TestCommand.java
@@ -9,6 +10,7 @@ D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\PrivateM
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\MessageListener.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\CfbApplication.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\config\CrossBotConfig.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\TaskService.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\MessageUpdateService.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\PaymentCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\RoleTrackingService.java
