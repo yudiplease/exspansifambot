@@ -1,0 +1,24 @@
+{
+  "name": "event",
+  "description": "Создать новость о сборе людей в игре на какое-либо мероприятие",
+  "options": [
+    {
+      "name": "event",
+      "description": "Тип мероприятия",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "time",
+      "description": "Время начала",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "location",
+      "description": "Место сбора",
+      "type": 3,
+      "required": true
+    }
+  ]
+}

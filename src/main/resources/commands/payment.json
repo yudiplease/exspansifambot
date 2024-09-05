@@ -1,0 +1,24 @@
+{
+  "name": "payment",
+  "description": "Создать запрос о выплате доли за сдачу контракта",
+  "options": [
+    {
+      "name": "contract",
+      "description": "Название контракта",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "statics",
+      "description": "Статики участников",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "proof",
+      "description": "Скриншот выполнения",
+      "type": 11,
+      "required": true
+    }
+  ]
+}

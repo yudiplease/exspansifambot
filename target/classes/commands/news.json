@@ -1,0 +1,12 @@
+{
+  "name": "news",
+  "description": "Создать новость для семьи",
+  "options": [
+    {
+      "name": "content",
+      "description": "Объявление",
+      "type": 3,
+      "required": true
+    }
+  ]
+}

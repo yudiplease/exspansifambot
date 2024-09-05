@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  cfb-app:
+    image: 'cfb_img:latest'
+    build: docker
+    container_name: cfb
+    ports:
+      - "8080:8080"
+    environment:
+      DISCORD_TOKEN: MTIyODA3MDY1NTIwODE5NDIwOA.GvzzIB.ShXw_M5uHTW1KmAuQyRwg7GSRCupNL_ZXCFS_o

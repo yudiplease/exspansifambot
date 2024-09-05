@@ -1,0 +1,12 @@
+{
+  "name": "test",
+  "description": "test",
+  "options": [
+    {
+      "name": "test",
+      "description": "test",
+      "type": 3,
+      "required": true
+    }
+  ]
+}
