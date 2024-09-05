@@ -42,7 +42,7 @@ public class CrossBotConfig {
         final GatewayDiscordClient client = DiscordClientBuilder.create(token)
                 .build()
                 .gateway()
-                .setInitialPresence(ignore -> ClientPresence.online(ClientActivity.listening("")))
+                .setInitialPresence(ignore -> ClientPresence.online(ClientActivity.custom("EXSPANSI FAMILY MAJESTIC RP DETROIT")))
                 .login()
                 .block();
 

@@ -7,6 +7,8 @@ import discord4j.core.object.command.ApplicationCommandInteractionOptionValue;
 import discord4j.core.spec.EmbedCreateSpec;
 import discord4j.rest.util.Color;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
@@ -18,6 +20,9 @@ import java.time.format.DateTimeFormatter;
 @Component
 @RequiredArgsConstructor
 public class AfkCommand implements SlashCommand {
+
+    private static final Logger logger = LoggerFactory.getLogger(AfkCommand.class);
+
     private final SendMessageToChannel sendMessageToChannel;
 
     @Override
