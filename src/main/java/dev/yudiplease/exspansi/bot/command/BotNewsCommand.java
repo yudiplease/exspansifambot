@@ -12,6 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 @Component
 @RequiredArgsConstructor
 public class BotNewsCommand implements SlashCommand {
@@ -31,6 +36,11 @@ public class BotNewsCommand implements SlashCommand {
                     .withEphemeral(true)
                     .withContent("Увы, но эта команда только для Майка, пупс. Извини.");
         }
+        ZoneId moscowZone = ZoneId.of("Europe/Moscow");
+        ZonedDateTime moscowTime = ZonedDateTime.now(moscowZone);
+        String releaseDate = DateTimeFormatter
+                .ofLocalizedDateTime(FormatStyle.SHORT)
+                .format(moscowTime);
         String version = event.getOption("version")
                 .flatMap(ApplicationCommandInteractionOption::getValue)
                 .map(ApplicationCommandInteractionOptionValue::asString)
@@ -42,6 +52,7 @@ public class BotNewsCommand implements SlashCommand {
         EmbedCreateSpec spec = EmbedCreateSpec.builder()
                 .color(Color.WHITE)
                 .title("НОВАЯ ФИЧА!")
+                .description(String.format("Дата релиза: %s", releaseDate))
                 .addField("Версия сборки: ", version, false)
                 .addField("Что нового: ", news, false)
                 .build();

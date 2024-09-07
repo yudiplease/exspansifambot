@@ -1,0 +1,12 @@
+{
+  "name": "userdelete",
+  "description": "Удалить информацию об игроке",
+  "options": [
+    {
+      "name": "static",
+      "description": "Статик игрока",
+      "type": 3,
+      "required": true
+    }
+  ]
+}

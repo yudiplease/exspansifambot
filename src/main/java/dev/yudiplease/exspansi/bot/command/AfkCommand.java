@@ -16,6 +16,7 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 @Component
 @RequiredArgsConstructor
@@ -34,8 +35,9 @@ public class AfkCommand implements SlashCommand {
     public Mono<Void> handle(ChatInputInteractionEvent event) {
         ZoneId moscowZone = ZoneId.of("Europe/Moscow");
         ZonedDateTime moscowTime = ZonedDateTime.now(moscowZone);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-        String formattedTime = moscowTime.format(formatter);
+        String issueDate = DateTimeFormatter
+                .ofLocalizedDateTime(FormatStyle.SHORT)
+                .format(moscowTime);
         String user = event.getInteraction().getUser().getId().asString();
         String time = event.getOption("time")
                 .flatMap(ApplicationCommandInteractionOption::getValue)
@@ -49,7 +51,7 @@ public class AfkCommand implements SlashCommand {
                 .color(Color.RED)
                 .title("АФК отчёт")
                 .addField("Отчёт отправил: ", String.format("<@%s>", user), true)
-                .addField("Начало ухода: ", formattedTime, false)
+                .addField("Начало ухода: ", issueDate, false)
                 .addField("Время ухода в АФК: ", time, false)
                 .addField("Причина: ", reason, false)
                 .build();

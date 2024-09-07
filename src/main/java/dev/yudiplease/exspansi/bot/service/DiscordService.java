@@ -7,8 +7,10 @@ import discord4j.core.object.entity.Attachment;
 import discord4j.core.object.entity.Member;
 import discord4j.core.object.entity.Role;
 import discord4j.core.object.entity.channel.MessageChannel;
+import discord4j.core.object.entity.channel.TextChannel;
 import discord4j.core.spec.EmbedCreateSpec;
 import discord4j.core.spec.MessageCreateSpec;
+import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +23,10 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -132,4 +138,28 @@ public class DiscordService {
                         .map(Snowflake::asLong)
                         .collect(Collectors.toList()));
     }
+
+//    @PostConstruct
+//    public void onStart() {
+//        sendStartupMessage();
+//    }
+//
+//    private void sendStartupMessage() {
+//        ZoneId moscowZone = ZoneId.of("Europe/Moscow");
+//        ZonedDateTime moscowTime = ZonedDateTime.now(moscowZone);
+//        String releaseDate = DateTimeFormatter
+//                .ofLocalizedDateTime(FormatStyle.SHORT)
+//                .format(moscowTime);
+//        MessageCreateSpec.Builder spec = MessageCreateSpec.builder();
+//        EmbedCreateSpec embed = EmbedCreateSpec.builder()
+//                .title("ОБНОВЛЕНИЕ У БОТА")
+//                .description(String.format("Версия сборки 0.0.7, %s", releaseDate))
+//                .build();
+//        spec.content("<%&1222663123882999868>");
+//        spec.addEmbed()
+//        gateway.getChannelById(Snowflake.of(1281314718258171904L))
+//                .ofType(TextChannel.class)
+//                .flatMap(channel -> channel.createMessage("Тест"))
+//                .subscribe();
+//    }
 }

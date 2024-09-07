@@ -14,7 +14,7 @@ public class MemberJoinListener {
     private static final Logger logger = LoggerFactory.getLogger(MemberJoinListener.class);
 
     public MemberJoinListener(GatewayDiscordClient client) {
-        client.on(MemberJoinEvent.class)
+        client.getEventDispatcher().on(MemberJoinEvent.class)
                 .filter(event -> event.getGuildId().equals(Snowflake.of("487505588700577798")))
                 .flatMap(this::handleMemberJoin)
                 .subscribe();

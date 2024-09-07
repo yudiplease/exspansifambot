@@ -1,0 +1,18 @@
+{
+  "name": "warnadd",
+  "description": "Выдать выговор члену семьи",
+  "options": [
+    {
+      "name": "static",
+      "description": "Статик игрока",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "reason",
+      "description": "Причина",
+      "type": 3,
+      "required": true
+    }
+  ]
+}

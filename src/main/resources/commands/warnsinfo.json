@@ -1,0 +1,12 @@
+{
+  "name": "warnsinfo",
+  "description": "Посмотреть информацию о выговорах члена семьи",
+  "options": [
+    {
+      "name": "static",
+      "description": "Статик игрока",
+      "type": 3,
+      "required": true
+    }
+  ]
+}
