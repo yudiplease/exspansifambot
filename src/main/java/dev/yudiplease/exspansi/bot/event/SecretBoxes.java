@@ -15,6 +15,7 @@ import discord4j.discordjson.possible.Possible;
 import discord4j.rest.util.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cglib.core.Local;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
@@ -63,13 +64,13 @@ public class SecretBoxes {
     }
 
     private void scheduleMesssage() {
-        boxesAt10AM();
-        boxesAt2PM();
-        boxesAt6PM();
-        boxesAt10PM();
+        sendMessageAt(LocalTime.of(9, 30), channelId);
+        sendMessageAt(LocalTime.of(13, 30), channelId);
+        sendMessageAt(LocalTime.of(17, 30), channelId);
+        sendMessageAt(LocalTime.of(21, 30), channelId);
     }
 
-    private void boxesAt10PM() {
+    private void sendMessageAt(LocalTime targetTime, Snowflake channelId) {
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -77,89 +78,18 @@ public class SecretBoxes {
                 sendMessage();
             }
         };
-        LocalTime targetTime = LocalTime.of(21, 30);
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
         if (delayMs < 0) {
             delayMs += Duration.ofDays(1).toMillis();
+            Mono.delay(Duration.ofMinutes(2), Schedulers.parallel())
+                    .flatMap(__ -> client.getChannelById(channelId)
+                            .cast(MessageChannel.class)
+                            .flatMap(channel -> channel.getMessageById(lastMessageId))
+                            .flatMap(Message::delete))
+                    .then(Mono.defer(this::sendFormDataMessage))
+                    .subscribe();
         }
         timer.schedule(task, delayMs);
-        Mono.delay(Duration.ofMinutes(15), Schedulers.parallel())
-                .flatMap(__ -> client.getChannelById(channelId)
-                        .cast(MessageChannel.class)
-                        .flatMap(channel -> channel.getMessageById(lastMessageId))
-                        .flatMap(Message::delete))
-                .then(Mono.defer(this::sendFormDataMessage))
-                .subscribe();
-    }
-
-    private void boxesAt6PM() {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                sendMessage();
-            }
-        };
-        LocalTime targetTime = LocalTime.of(17, 30);
-        long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
-        if (delayMs < 0) {
-            delayMs += Duration.ofDays(1).toMillis();
-        }
-        timer.schedule(task, delayMs);
-        Mono.delay(Duration.ofMinutes(15), Schedulers.parallel())
-                .flatMap(__ -> client.getChannelById(channelId)
-                        .cast(MessageChannel.class)
-                        .flatMap(channel -> channel.getMessageById(lastMessageId))
-                        .flatMap(Message::delete))
-                .then(Mono.defer(this::sendFormDataMessage))
-                .subscribe();
-    }
-
-    private void boxesAt2PM() {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                sendMessage();
-            }
-        };
-        LocalTime targetTime = LocalTime.of(13, 30);
-        long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
-        if (delayMs < 0) {
-            delayMs += Duration.ofDays(1).toMillis();
-        }
-        timer.schedule(task, delayMs);
-        Mono.delay(Duration.ofMinutes(15), Schedulers.parallel())
-                .flatMap(__ -> client.getChannelById(channelId)
-                        .cast(MessageChannel.class)
-                        .flatMap(channel -> channel.getMessageById(lastMessageId))
-                        .flatMap(Message::delete))
-                .then(Mono.defer(this::sendFormDataMessage))
-                .subscribe();
-    }
-
-    private void boxesAt10AM() {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                sendMessage();
-            }
-        };
-        LocalTime targetTime = LocalTime.of(9, 30);
-        ZoneId zoneId = ZoneId.of("Europe/Moscow");
-        long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
-        if (delayMs < 0) {
-            delayMs += Duration.ofDays(1).toMillis();
-        }
-        timer.schedule(task, delayMs);
-        Mono.delay(Duration.ofMinutes(15), Schedulers.parallel())
-                .flatMap(__ -> client.getChannelById(channelId)
-                        .cast(MessageChannel.class)
-                        .flatMap(channel -> channel.getMessageById(lastMessageId))
-                        .flatMap(Message::delete))
-                .then(Mono.defer(this::sendFormDataMessage))
-                .subscribe();
     }
 
     private void sendMessage() {
@@ -170,7 +100,7 @@ public class SecretBoxes {
         MessageChannel channel = client.getChannelById(channelId).cast(MessageChannel.class).block();
         Message message = Objects.requireNonNull(channel).createMessage(MessageCreateSpec.builder()
                 .content("<@&1221116962864631860>\n" +
-                        "**ТАЙНИКИ ЧЕРЕЗ 30 МИНУТ" +
+                        "**ТАЙНИКИ ЧЕРЕЗ 30 МИНУТ\n" +
                         "Нажмите галочку, чтобы заявить о своём участии, " +
                         "иначе крестик.**\n" +
                         "P.S. **ОБЯЗАТЕЛЬНО ПРИ НАХОЖДЕНИИ В ИГРЕ!**")
