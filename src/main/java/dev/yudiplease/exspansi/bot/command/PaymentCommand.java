@@ -1,21 +1,30 @@
 package dev.yudiplease.exspansi.bot.command;
 
 import dev.yudiplease.exspansi.bot.SendMessageToChannel;
+import discord4j.common.util.Snowflake;
+import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.interaction.ChatInputInteractionEvent;
 import discord4j.core.object.command.ApplicationCommandInteractionOption;
 import discord4j.core.object.command.ApplicationCommandInteractionOptionValue;
 import discord4j.core.object.entity.Attachment;
+import discord4j.core.object.entity.Message;
+import discord4j.core.object.entity.channel.MessageChannel;
 import discord4j.core.spec.EmbedCreateSpec;
+import discord4j.core.spec.MessageCreateSpec;
 import discord4j.rest.util.Color;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
+
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
 public class PaymentCommand implements SlashCommand {
 
     private final SendMessageToChannel sendMessageToChannel;
+    private final Snowflake channelId = Snowflake.of(1221109587579637771L);
+    private final GatewayDiscordClient client;
 
     @Override
     public String getName() {
@@ -44,7 +53,11 @@ public class PaymentCommand implements SlashCommand {
                 .addField("Статики игроков", statics, false)
                 .image(proof.getUrl())
                 .build();
-        sendMessageToChannel.sendMessageToChannelAsEmbed(1221109587579637771l, spec);
+        MessageChannel channel = client.getChannelById(channelId).cast(MessageChannel.class).block();
+        Message message = Objects.requireNonNull(channel).createMessage(MessageCreateSpec.builder()
+                .content("<@&1230375980623728670> <@&1280913939139399721>")
+                .addEmbed(spec)
+                .build()).block();
         return event.reply()
                 .withEphemeral(true)
                 .withContent("Запрос о получении выплаты отправлен.");

@@ -47,8 +47,6 @@ public class SecretBoxes {
     public SecretBoxes(GatewayDiscordClient client) {
         this.buttonClicks = 0;
         this.client = client;
-        scheduleMesssage();
-
         client.on(ButtonInteractionEvent.class)
                 .flatMap(this::handleButtonClick)
                 .onErrorContinue((err, obj) -> {
@@ -61,6 +59,7 @@ public class SecretBoxes {
                     logger.error("Ошибка обработки модального окна: " + err.getMessage());
                     err.printStackTrace();
                 }).subscribe();
+        scheduleMesssage();
     }
 
     private void scheduleMesssage() {
@@ -78,7 +77,6 @@ public class SecretBoxes {
                 sendMessage();
             }
         };
-
         LocalTime targetTime = LocalTime.of(21, 30);
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
         if (delayMs < 0) {
@@ -102,7 +100,6 @@ public class SecretBoxes {
                 sendMessage();
             }
         };
-
         LocalTime targetTime = LocalTime.of(17, 30);
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
         if (delayMs < 0) {
@@ -126,7 +123,6 @@ public class SecretBoxes {
                 sendMessage();
             }
         };
-
         LocalTime targetTime = LocalTime.of(13, 30);
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
         if (delayMs < 0) {
@@ -150,7 +146,6 @@ public class SecretBoxes {
                 sendMessage();
             }
         };
-
         LocalTime targetTime = LocalTime.of(9, 30);
         ZoneId zoneId = ZoneId.of("Europe/Moscow");
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
@@ -165,7 +160,6 @@ public class SecretBoxes {
                         .flatMap(Message::delete))
                 .then(Mono.defer(this::sendFormDataMessage))
                 .subscribe();
-
     }
 
     private void sendMessage() {
@@ -177,7 +171,7 @@ public class SecretBoxes {
         Message message = Objects.requireNonNull(channel).createMessage(MessageCreateSpec.builder()
                 .content("<@&1221116962864631860>\n" +
                         "**ТАЙНИКИ ЧЕРЕЗ 30 МИНУТ" +
-                        "**Нажмите галочку, чтобы заявить о своём участии, " +
+                        "Нажмите галочку, чтобы заявить о своём участии, " +
                         "иначе крестик.**\n" +
                         "P.S. **ОБЯЗАТЕЛЬНО ПРИ НАХОЖДЕНИИ В ИГРЕ!**")
                 .addEmbed(EmbedCreateSpec.builder()

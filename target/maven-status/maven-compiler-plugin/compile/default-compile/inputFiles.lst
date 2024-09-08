@@ -25,6 +25,7 @@ D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\EventLis
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\event\SecretBoxes.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\TestCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\entity\WarnInfo.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\util\SecretBoxesScheduling.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\MemberJoinListener.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\user\UserDeleteCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\warn\WarnDeleteCommand.java
