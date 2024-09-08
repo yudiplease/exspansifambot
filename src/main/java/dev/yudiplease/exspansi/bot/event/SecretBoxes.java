@@ -81,7 +81,7 @@ public class SecretBoxes {
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
         if (delayMs < 0) {
             delayMs += Duration.ofDays(1).toMillis();
-            Mono.delay(Duration.ofMinutes(2), Schedulers.parallel())
+            Mono.delay(Duration.ofMinutes(15), Schedulers.parallel())
                     .flatMap(__ -> client.getChannelById(channelId)
                             .cast(MessageChannel.class)
                             .flatMap(channel -> channel.getMessageById(lastMessageId))
