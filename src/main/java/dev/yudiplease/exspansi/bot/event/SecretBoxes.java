@@ -173,7 +173,6 @@ public class SecretBoxes {
 
     private Mono<Void> sendFormDataMessage() {
         int clickCounts = buttonClicks;
-        logger.info(buttonClicks.toString());
         return client.getChannelById(channelId)
                 .cast(TextChannel.class)
                 .flatMap(textChannel -> {
@@ -189,7 +188,8 @@ public class SecretBoxes {
                     }
                     buttonClickCounts.clear();
                     buttonClicks = 0;
-                    logger.info(buttonClicks.toString());
+                    formData.clear();
+                    lastMessageId = null;
                     return textChannel.createMessage()
                             .withContent("<@&1221116962864631860>")
                             .withEmbeds(embed.build());
