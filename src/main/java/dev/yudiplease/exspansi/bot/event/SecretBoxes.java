@@ -191,7 +191,7 @@ public class SecretBoxes {
                     formData.clear();
                     lastMessageId = null;
                     return textChannel.createMessage()
-                            .withContent("<@&1221116962864631860>")
+                            .withContent("<@&1221116962864631860> Желаю удачи на тайниках! У вас всё получится!")
                             .withEmbeds(embed.build());
                 })
                 .then();
