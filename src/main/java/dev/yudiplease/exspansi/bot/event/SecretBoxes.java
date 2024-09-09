@@ -180,11 +180,15 @@ public class SecretBoxes {
                     embed.title("Тайники : Проверка участия");
                     embed.color(Color.RED);
                     embed.addField("Количество плюсов: ", String.valueOf(clickCounts), false);
-                    embed.addField("Минусы: ", "", false);
-                    for (Map.Entry<String, String> entry : formData.entrySet()) {
-                        embed.addField("staticId: ", entry.getKey(), true);
-                        embed.addField("Причина отсутствия: ", entry.getValue(), true);
-                        embed.addField("", "", false);
+                    if (formData.isEmpty()) {
+                        embed.addField("Минусов нет, все кто онлайн, должны принять участие.", "", false);
+                    } else {
+                        embed.addField("Минусы: ", "", false);
+                        for (Map.Entry<String, String> entry : formData.entrySet()) {
+                            embed.addField("staticId: ", entry.getKey(), true);
+                            embed.addField("Причина отсутствия: ", entry.getValue(), true);
+                            embed.addField("", "", false);
+                        }
                     }
                     buttonClickCounts.clear();
                     buttonClicks = 0;
