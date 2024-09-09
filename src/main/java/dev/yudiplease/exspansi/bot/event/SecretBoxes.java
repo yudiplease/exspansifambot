@@ -75,7 +75,7 @@ public class SecretBoxes {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                sendMessage();
+                sendMessage(channelId);
             }
         };
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
@@ -85,7 +85,7 @@ public class SecretBoxes {
         timer.schedule(task, delayMs);
     }
 
-    private void sendMessage() {
+    private void sendMessage(Snowflake channelId) {
         ZonedDateTime moscowTime = ZonedDateTime.now(zoneId).plusMinutes(30);
         String startTime = DateTimeFormatter.
                 ofLocalizedDateTime(FormatStyle.SHORT)
