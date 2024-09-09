@@ -34,11 +34,6 @@ public class CrossBotConfig {
     private String token;
 
     @Bean
-    public DiscordService discordService() {
-        return new DiscordService(token);
-    }
-
-    @Bean
     public <T extends Event> GatewayDiscordClient gatewayDiscordClient(final List<EventListener<T>> eventListeners) {
         final GatewayDiscordClient client = DiscordClientBuilder.create(token)
                 .build()

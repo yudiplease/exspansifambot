@@ -81,13 +81,6 @@ public class SecretBoxes {
         long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
         if (delayMs < 0) {
             delayMs += Duration.ofDays(1).toMillis();
-            Mono.delay(Duration.ofMinutes(15), Schedulers.parallel())
-                    .flatMap(__ -> client.getChannelById(channelId)
-                            .cast(MessageChannel.class)
-                            .flatMap(channel -> channel.getMessageById(lastMessageId))
-                            .flatMap(Message::delete))
-                    .then(Mono.defer(this::sendFormDataMessage))
-                    .subscribe();
         }
         timer.schedule(task, delayMs);
     }
@@ -114,9 +107,15 @@ public class SecretBoxes {
                                 Button.danger("no", "✖")
                         )
                 )
-
                 .build()).block();
         lastMessageId = Objects.requireNonNull(message).getId();
+        Mono.delay(Duration.ofMinutes(15), Schedulers.parallel())
+                .flatMap(__ -> client.getChannelById(channelId)
+                        .cast(MessageChannel.class)
+                        .flatMap(messageChannel -> messageChannel.getMessageById(lastMessageId))
+                        .flatMap(Message::delete))
+                .then(Mono.defer(this::sendFormDataMessage))
+                .subscribe();
     }
 
     @EventListener

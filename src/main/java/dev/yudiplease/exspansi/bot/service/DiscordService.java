@@ -43,8 +43,8 @@ public class DiscordService {
     @Getter
     private final List<Snowflake> roleIds;
 
-    public DiscordService(String token) {
-        this.gateway = DiscordClient.create(token).login().block();
+    public DiscordService(GatewayDiscordClient client) {
+        this.gateway = client;
         this.roleIds = new ArrayList<>();
         roleIds.add(Snowflake.of("1271064803703525396"));
     }
