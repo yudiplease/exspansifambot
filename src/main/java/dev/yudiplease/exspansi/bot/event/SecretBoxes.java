@@ -1,7 +1,6 @@
 package dev.yudiplease.exspansi.bot.event;
 
 import discord4j.common.util.Snowflake;
-import discord4j.core.DiscordClient;
 import discord4j.core.GatewayDiscordClient;
 import discord4j.core.event.domain.interaction.ButtonInteractionEvent;
 import discord4j.core.event.domain.interaction.ModalSubmitInteractionEvent;
@@ -10,18 +9,14 @@ import discord4j.core.object.entity.Message;
 import discord4j.core.object.entity.channel.MessageChannel;
 import discord4j.core.object.entity.channel.TextChannel;
 import discord4j.core.spec.*;
-import discord4j.discordjson.json.ComponentData;
-import discord4j.discordjson.possible.Possible;
 import discord4j.rest.util.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cglib.core.Local;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import javax.security.auth.callback.TextInputCallback;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.ZoneId;
@@ -29,8 +24,9 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class SecretBoxes {
@@ -44,6 +40,8 @@ public class SecretBoxes {
     private static final String STATIC_ID = "staticId";
     private Snowflake lastMessageId;
     private final ZoneId zoneId = ZoneId.of("Europe/Moscow");
+
+    private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public SecretBoxes(GatewayDiscordClient client) {
         this.buttonClicks = 0;
@@ -60,29 +58,28 @@ public class SecretBoxes {
                     logger.error("Ошибка обработки модального окна: " + err.getMessage());
                     err.printStackTrace();
                 }).subscribe();
-        scheduleMesssage();
+        scheduleMessage();
     }
 
-    private void scheduleMesssage() {
-        sendMessageAt(LocalTime.of(9, 30), channelId);
-        sendMessageAt(LocalTime.of(13, 30), channelId);
-        sendMessageAt(LocalTime.of(17, 30), channelId);
-        sendMessageAt(LocalTime.of(21, 30), channelId);
+    private void scheduleMessage() {
+        sendMessageAtTimeEveryDay(LocalTime.of(9, 30), channelId);
+        sendMessageAtTimeEveryDay(LocalTime.of(13, 30), channelId);
+        sendMessageAtTimeEveryDay(LocalTime.of(17, 30), channelId);
+        sendMessageAtTimeEveryDay(LocalTime.of(21, 30), channelId);
     }
 
-    private void sendMessageAt(LocalTime targetTime, Snowflake channelId) {
-        Timer timer = new Timer();
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                sendMessage(channelId);
-            }
-        };
-        long delayMs = Duration.between(LocalTime.now(zoneId), targetTime).toMillis();
-        if (delayMs < 0) {
-            delayMs += Duration.ofDays(1).toMillis();
+    private void sendMessageAtTimeEveryDay(LocalTime targetTime, Snowflake channelId) {
+        LocalTime now = LocalTime.now(zoneId);
+        Duration duration = Duration.between(now, targetTime);
+        if (duration.isNegative()) {
+            duration = duration.plusDays(1);
         }
-        timer.schedule(task, delayMs);
+        scheduler.scheduleAtFixedRate(
+                () -> sendMessage(channelId),
+                duration.toSeconds(),
+                Duration.ofDays(1).toSeconds(),
+                TimeUnit.SECONDS
+        );
     }
 
     private void sendMessage(Snowflake channelId) {

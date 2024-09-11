@@ -1,0 +1,30 @@
+{
+  "name": "capture",
+  "description": "Объявить о сборе на капт",
+  "options": [
+    {
+      "name": "time",
+      "description": "Время начала",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "vs",
+      "description": "Против кого",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "coller",
+      "description": "Тэгните кто будет колить или напишите его имя",
+      "type": 3,
+      "required": true
+    },
+    {
+      "name": "players",
+      "description": "Сколько нужно людей (Введите число)",
+      "type": 3,
+      "required": true
+    }
+  ]
+}

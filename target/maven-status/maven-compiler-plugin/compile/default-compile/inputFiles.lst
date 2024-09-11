@@ -2,6 +2,7 @@ D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\warn\Warns
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\util\AttachmentHandler.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\AfkCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\UserService.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\event\Capture.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\PrivateMessageListener.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\MessageListener.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\CfbApplication.java
