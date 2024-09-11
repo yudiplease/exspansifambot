@@ -81,7 +81,6 @@ public class SecretBoxes {
                 TimeUnit.SECONDS
         );
     }
-
     private void sendMessage(Snowflake channelId) {
         ZonedDateTime moscowTime = ZonedDateTime.now(zoneId).plusMinutes(30);
         String startTime = DateTimeFormatter.
@@ -127,10 +126,8 @@ public class SecretBoxes {
                 .mapToInt(value -> (int) value.chars().filter(c -> c == '+').count())
                 .sum();
         if (event.getCustomId().equals("no") && !buttonClickCounts.containsKey(userId)) {
-            TextInput nameInput = TextInput.small("staticId", "Ваш staticId:", "staticId");
             TextInput descriptionInput = TextInput.paragraph("reason", "Укажите причину отсутствия: ", "Обязательно к заполнению при нахождении в игре");
             List<LayoutComponent> components = new ArrayList<>();
-            components.add(ActionRow.of(nameInput));
             components.add(ActionRow.of(descriptionInput));
             InteractionPresentModalSpec spec = InteractionPresentModalSpec.builder()
                     .customId("reason")
@@ -152,16 +149,14 @@ public class SecretBoxes {
 
     @EventListener
     public Mono<Void> handleModalSubmit(ModalSubmitInteractionEvent event) {
-        String staticId = "";
         String reason = "";
+        String player = event.getInteraction().getUser().getTag();
         for (TextInput component : event.getComponents(TextInput.class)) {
             if (REASON_ID.equals(component.getCustomId())) {
                 reason = component.getValue().orElse("");
-            } else if (STATIC_ID.equals(component.getCustomId())) {
-                staticId = component.getValue().orElse("");
             }
         }
-        this.formData.put(staticId, reason);
+        this.formData.put(player, reason);
         logger.info(this.formData.values().toString());
         return event.reply(InteractionApplicationCommandCallbackSpec.builder()
                 .content("Причина отсутствия учтена!").build()
@@ -182,7 +177,7 @@ public class SecretBoxes {
                     } else {
                         embed.addField("Минусы: ", "", false);
                         for (Map.Entry<String, String> entry : formData.entrySet()) {
-                            embed.addField("staticId: ", entry.getKey(), true);
+                            embed.addField("Тэг игрока: ", entry.getKey(), true);
                             embed.addField("Причина отсутствия: ", entry.getValue(), true);
                             embed.addField("", "", false);
                         }

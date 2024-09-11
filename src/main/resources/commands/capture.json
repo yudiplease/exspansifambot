@@ -9,6 +9,12 @@
       "required": true
     },
     {
+      "name": "chargetime",
+      "description": "Время сбора на капт",
+      "type": 3,
+      "required": true
+    },
+    {
       "name": "vs",
       "description": "Против кого",
       "type": 3,
