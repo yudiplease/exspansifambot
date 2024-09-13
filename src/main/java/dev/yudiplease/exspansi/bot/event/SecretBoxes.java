@@ -150,7 +150,7 @@ public class SecretBoxes {
     @EventListener
     public Mono<Void> handleModalSubmit(ModalSubmitInteractionEvent event) {
         String reason = "";
-        String player = event.getInteraction().getUser().getTag();
+        String player = event.getInteraction().getUser().getId().asString();
         for (TextInput component : event.getComponents(TextInput.class)) {
             if (REASON_ID.equals(component.getCustomId())) {
                 reason = component.getValue().orElse("");

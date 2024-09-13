@@ -1,6 +1,7 @@
 package dev.yudiplease.exspansi.bot.config;
 
 import dev.yudiplease.exspansi.bot.SendMessageToChannel;
+import dev.yudiplease.exspansi.bot.entity.Contract;
 import dev.yudiplease.exspansi.bot.listeners.EventListener;
 import dev.yudiplease.exspansi.bot.service.DiscordService;
 import discord4j.core.DiscordClientBuilder;
@@ -24,7 +25,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Configuration
 public class CrossBotConfig {
@@ -32,6 +36,8 @@ public class CrossBotConfig {
 
     @Value("${discord.token}")
     private String token;
+
+
 
     @Bean
     public <T extends Event> GatewayDiscordClient gatewayDiscordClient(final List<EventListener<T>> eventListeners) {

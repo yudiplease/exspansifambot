@@ -1,0 +1,62 @@
+{
+  "name": "opencontract",
+  "description": "Создать новость об активации контракта",
+  "options": [
+    {
+      "name": "name",
+      "description": "Название контракта",
+      "type": 3,
+      "required": true,
+      "choices": [
+        {
+          "name": "\uD83C\uDF3F Гровер III",
+          "value": "\uD83C\uDF3F Гровер III"
+        },
+        {
+          "name": "\uD83D\uDCE6 Незаконное предприятие",
+          "value": "\uD83D\uDCE6 Незаконное предприятие"
+        },
+        {
+          "name": "\uD83D\uDCB5 Ценная партия II",
+          "value": "\uD83D\uDCB5 Ценная партия II"
+        },
+        {
+          "name": "\uD83D\uDCBB Наводка I",
+          "value": "\uD83D\uDCBB Наводка I"
+        },
+        {
+          "name": "\uD83D\uDE9B Конспирация",
+          "value": "\uD83D\uDE9B Конспирация"
+        },
+        {
+          "name": "\uD83C\uDF4A Апельсины",
+          "value": "\uD83C\uDF4A Апельсины"
+        },
+        {
+          "name": "\uD83C\uDF44 Шампиньоны",
+          "value": "\uD83C\uDF44 Шампиньоны"
+        },
+        {
+          "name": "\uD83C\uDF32 Сосна",
+          "value": "\uD83C\uDF32 Сосна"
+        }
+      ]
+    },
+    {
+      "name": "activated",
+      "description": "Контракт активирован?",
+      "type": 3,
+      "required": true,
+      "choices": [
+        {
+          "name": "Да",
+          "value": "true"
+        },
+        {
+          "name": "Нет",
+          "value": "false"
+        }
+      ]
+    }
+  ]
+}

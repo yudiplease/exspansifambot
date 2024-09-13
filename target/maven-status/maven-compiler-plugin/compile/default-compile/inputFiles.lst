@@ -14,8 +14,10 @@ D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\entity\UserInfo.ja
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\SendMessageToChannel.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\SlashCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\NewsCommand.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\entity\Contract.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\DiscordService.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\GlobalCommandRegister.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\contract\OpenContractCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\warn\WarnAddCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\MessageCreateService.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\EventCommand.java
@@ -30,10 +32,13 @@ D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\util\SecretBoxesSc
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\listeners\MemberJoinListener.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\user\UserDeleteCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\warn\WarnDeleteCommand.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\entity\TestForum.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\config\CrossBotConfig.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\TaskService.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\RoleTrackingService.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\user\UserInfoCommand.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\config\ContractConfig.java
+D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\contract\CloseContractCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\user\UserAddCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\command\AgentAddCommand.java
 D:\ITIS\3course\CFB\src\main\java\dev\yudiplease\exspansi\bot\service\KeepAliveService.java

@@ -1,7 +1,8 @@
 package dev.yudiplease.exspansi.bot;
 
 import discord4j.common.JacksonResources;
-import discord4j.discordjson.json.ApplicationCommandRequest;
+import discord4j.core.object.command.ApplicationCommandOption;
+import discord4j.discordjson.json.*;
 import discord4j.rest.RestClient;
 import discord4j.rest.service.ApplicationService;
 import lombok.RequiredArgsConstructor;
@@ -30,9 +31,33 @@ public class GlobalCommandRegister implements ApplicationRunner {
         final long appId = client.getApplicationId().block();
 
         List<ApplicationCommandRequest> commands = new ArrayList<>();
-        for (Resource resource: matcher.getResources("commands/*.json")) {
+        for (Resource resource : matcher.getResources("commands/*.json")) {
             ApplicationCommandRequest request = d4jMapper.getObjectMapper()
                     .readValue(resource.getInputStream(), ApplicationCommandRequest.class);
+            List<ApplicationCommandOptionData> options = new ArrayList<>();
+            for (ApplicationCommandOptionData option : request.options().get()) {
+                List<ApplicationCommandOptionChoiceData> choices = new ArrayList<>();
+                if (option.choices().toOptional().isPresent()) {
+                    for (ApplicationCommandOptionChoiceData choice : option.choices().get()) {
+                        choices.add(ApplicationCommandOptionChoiceData.builder()
+                                .name(choice.name())
+                                .value(choice.value())
+                                .build());
+                    }
+                }
+                options.add(ApplicationCommandOptionData.builder()
+                        .name(option.name())
+                        .type(option.type())
+                        .description(option.description())
+                        .required(option.required())
+                        .choices(choices)
+                        .build());
+            }
+            request = ApplicationCommandRequest.builder()
+                    .name(request.name())
+                    .description(request.description())
+                    .options(options)
+                    .build();
             commands.add(request);
             LOGGER.info(commands.stream().toString());
         }
