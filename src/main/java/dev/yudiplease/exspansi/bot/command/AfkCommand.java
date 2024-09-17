@@ -25,12 +25,14 @@ import java.time.format.FormatStyle;
 import java.util.Objects;
 
 @Component
-@RequiredArgsConstructor
 public class AfkCommand implements SlashCommand {
-
-    private static final Logger logger = LoggerFactory.getLogger(AfkCommand.class);
     private final Snowflake channelId = Snowflake.of(1222217190871138334L);
+
     private final GatewayDiscordClient client;
+
+    public AfkCommand(GatewayDiscordClient client) {
+        this.client = client;
+    }
 
     @Override
     public String getName() {

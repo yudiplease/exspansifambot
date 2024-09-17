@@ -81,6 +81,7 @@ public class SecretBoxes {
                 TimeUnit.SECONDS
         );
     }
+
     private void sendMessage(Snowflake channelId) {
         ZonedDateTime moscowTime = ZonedDateTime.now(zoneId).plusMinutes(30);
         String startTime = DateTimeFormatter.
@@ -177,7 +178,7 @@ public class SecretBoxes {
                     } else {
                         embed.addField("Минусы: ", "", false);
                         for (Map.Entry<String, String> entry : formData.entrySet()) {
-                            embed.addField("Тэг игрока: ", entry.getKey(), true);
+                            embed.addField("Тэг игрока: ", String.format("<@%s>", entry.getKey()), true);
                             embed.addField("Причина отсутствия: ", entry.getValue(), true);
                             embed.addField("", "", false);
                         }
